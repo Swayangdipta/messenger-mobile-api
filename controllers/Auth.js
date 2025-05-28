@@ -3,11 +3,11 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 exports.login = async (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
     try {
         const user = await User.findOne({
-            $or: [{ email }, { username: email }]
+            $or: [{ email: username }, { username }]
         });
 
         if (!user) {
